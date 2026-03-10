@@ -7,6 +7,7 @@ const apps = [
     tags: ['React', 'TypeScript', 'DataViz'],
     accent: 'var(--accent-cyan)',
     image: './assets/megabunnish.webp',
+    status: 'live',
   },
   {
     name: 'Yield',
@@ -16,6 +17,7 @@ const apps = [
     tags: ['JavaScript', 'DeFi', 'Analytics'],
     accent: 'var(--accent-gold)',
     image: './assets/yield.webp',
+    status: 'wip',
   },
   {
     name: 'PerpMath',
@@ -25,6 +27,7 @@ const apps = [
     tags: ['Perpetuals', 'Trading', 'Risk'],
     accent: 'var(--accent-coral)',
     image: './assets/perp.webp',
+    status: 'live',
   },
 ];
 
@@ -35,7 +38,7 @@ if (!grid || !template) {
   throw new Error('UI bootstrap failed: missing required DOM nodes.');
 }
 
-for (const app of apps) {
+for (const [index, app] of apps.entries()) {
   const fragment = template.content.cloneNode(true);
   const card = fragment.querySelector('.app-card');
   const kicker = fragment.querySelector('.app-card__kicker');
@@ -43,6 +46,7 @@ for (const app of apps) {
   const img = fragment.querySelector('.app-card__banner-img');
   const description = fragment.querySelector('.app-card__description');
   const tagsRoot = fragment.querySelector('.app-card__tags');
+  const statusEl = fragment.querySelector('.app-card__status');
 
   if (!card || !kicker || !name || !img || !description || !tagsRoot) {
     continue;
@@ -50,6 +54,7 @@ for (const app of apps) {
 
   card.href = app.url;
   card.style.setProperty('--accent', app.accent);
+  card.style.setProperty('--stagger', `${index * 90}ms`);
   card.setAttribute('aria-label', `Ouvrir ${app.name} (${app.url})`);
 
   kicker.textContent = app.kicker;
@@ -57,6 +62,11 @@ for (const app of apps) {
   img.src = app.image;
   img.alt = `Apercu de ${app.name}`;
   description.textContent = app.description;
+
+  if (statusEl && app.status) {
+    statusEl.textContent = app.status === 'live' ? 'Live' : 'Bientôt';
+    statusEl.classList.add(`app-card__status--${app.status}`);
+  }
 
   for (const tag of app.tags) {
     const chip = document.createElement('span');

@@ -35,7 +35,21 @@
         </div>
       </header>
 
+      <div class="section-header">
+        <p class="section-header__title">Projets</p>
+        <span class="section-header__line"></span>
+        <span class="section-header__count">3 apps</span>
+      </div>
+
       <section class="apps-grid" id="appsGrid" aria-label="Liste des applications"></section>
+
+      <footer class="footer">
+        <p class="footer__copy">&copy; 2026 Joestar &middot; Tous droits réservés</p>
+        <nav class="footer__links">
+          <a href="https://x.com/JoestarCrypto" target="_blank" rel="noreferrer noopener">Twitter</a>
+          <a href="https://github.com/Joestar-crypto" target="_blank" rel="noreferrer noopener">GitHub</a>
+        </nav>
+      </footer>
     </main>
 
     <template id="appCardTemplate">
@@ -43,6 +57,7 @@
         <div class="app-card__banner">
           <img class="app-card__banner-img" alt="" loading="lazy" />
           <div class="app-card__banner-overlay"></div>
+          <span class="app-card__status"></span>
         </div>
         <div class="app-card__content">
           <div class="app-card__meta">
