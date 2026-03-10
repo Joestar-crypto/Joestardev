@@ -26,7 +26,7 @@ const apps = [
     url: 'https://perpmath.joestarcrypto.com/',
     tags: ['Perpetuals', 'Trading', 'Risk'],
     accent: 'var(--accent-coral)',
-    image: './assets/perpmath.png',
+    image: './Perpmath.png',
     status: 'live',
   },
 ];
