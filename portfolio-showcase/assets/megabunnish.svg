@@ -1,0 +1,21 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#08111D"/>
+      <stop offset="1" stop-color="#0D1D2D"/>
+    </linearGradient>
+    <linearGradient id="halo" x1="284" y1="80" x2="890" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18C0C1"/>
+      <stop offset="1" stop-color="#76A1FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="240" cy="120" r="160" fill="#18C0C1" fill-opacity="0.22"/>
+  <circle cx="1010" cy="540" r="210" fill="#76A1FF" fill-opacity="0.2"/>
+  <rect x="150" y="118" width="900" height="394" rx="28" fill="#0C1827" stroke="#223A56"/>
+  <path d="M250 394C320 320 420 266 520 292C592 312 640 376 722 372C782 368 824 334 862 286" stroke="url(#halo)" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="520" cy="292" r="18" fill="#18C0C1"/>
+  <circle cx="722" cy="372" r="18" fill="#76A1FF"/>
+  <text x="210" y="228" fill="#E6F3FF" font-size="44" font-family="Arial, sans-serif" font-weight="700">MegaBunnish</text>
+  <text x="210" y="272" fill="#9DB8D0" font-size="24" font-family="Arial, sans-serif">Constellation command center</text>
+</svg>

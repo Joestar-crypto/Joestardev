@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joestar Apps | Portfolio</title>
+    <meta
+      name="description"
+      content="Hub visuel pour toutes les apps Joestar. Clique une carte pour ouvrir son sous-domaine."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient--left" aria-hidden="true"></div>
+    <div class="ambient ambient--right" aria-hidden="true"></div>
+
+    <main class="page">
+      <header class="hero">
+        <div class="hero__text">
+          <p class="hero__eyebrow">Joestarcom</p>
+          <h1>Mes apps.</h1>
+          <p class="hero__sub">Clique sur une carte pour ouvrir directement l'application.</p>
+        </div>
+        <div class="hero__profile">
+          <img src="./assets/jojo2.webp" alt="Joestar" />
+          <strong>Joestar</strong>
+          <small>Builder &amp; DeFi dev</small>
+          <a href="https://x.com/JoestarCrypto" target="_blank" rel="noreferrer noopener">@JoestarCrypto &#x2197;</a>
+        </div>
+      </header>
+
+      <section class="apps-grid" id="appsGrid" aria-label="Liste des applications"></section>
+    </main>
+
+    <template id="appCardTemplate">
+      <a class="app-card" target="_blank" rel="noreferrer noopener">
+        <div class="app-card__banner">
+          <img class="app-card__banner-img" alt="" loading="lazy" />
+          <div class="app-card__banner-overlay"></div>
+        </div>
+        <div class="app-card__content">
+          <div class="app-card__meta">
+            <p class="app-card__kicker"></p>
+            <span class="app-card__cta">&#x2197;</span>
+          </div>
+          <h2 class="app-card__name"></h2>
+          <p class="app-card__description"></p>
+          <div class="app-card__tags"></div>
+        </div>
+      </a>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

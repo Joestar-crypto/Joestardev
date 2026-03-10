@@ -1,0 +1,23 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#130D05"/>
+      <stop offset="1" stop-color="#221607"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="300" y1="170" x2="860" y2="400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E0AB3B"/>
+      <stop offset="1" stop-color="#F4D18C"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="170" cy="120" r="130" fill="#E0AB3B" fill-opacity="0.2"/>
+  <circle cx="980" cy="510" r="200" fill="#F4D18C" fill-opacity="0.16"/>
+  <rect x="150" y="118" width="900" height="394" rx="28" fill="#25190A" stroke="#5E431A"/>
+  <rect x="238" y="344" width="110" height="106" rx="14" fill="url(#bar)"/>
+  <rect x="390" y="300" width="110" height="150" rx="14" fill="url(#bar)"/>
+  <rect x="542" y="252" width="110" height="198" rx="14" fill="url(#bar)"/>
+  <rect x="694" y="210" width="110" height="240" rx="14" fill="url(#bar)"/>
+  <rect x="846" y="172" width="110" height="278" rx="14" fill="url(#bar)"/>
+  <text x="210" y="228" fill="#FFF4D6" font-size="44" font-family="Arial, sans-serif" font-weight="700">Yield</text>
+  <text x="210" y="272" fill="#CFAE73" font-size="24" font-family="Arial, sans-serif">Opportunity and APY dashboard</text>
+</svg>
