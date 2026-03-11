@@ -52,10 +52,16 @@ for (const [index, app] of apps.entries()) {
     continue;
   }
 
-  card.href = app.url;
+  if (app.status === 'live') {
+    card.href = app.url;
+    card.setAttribute('aria-label', `Open ${app.name}`);
+  } else {
+    card.removeAttribute('href');
+    card.classList.add('app-card--disabled');
+    card.setAttribute('aria-label', app.name);
+  }
   card.style.setProperty('--accent', app.accent);
   card.style.setProperty('--stagger', `${index * 90}ms`);
-  card.setAttribute('aria-label', `Open ${app.name}`);
 
   kicker.textContent = app.kicker;
   name.textContent = app.name;

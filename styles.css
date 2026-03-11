@@ -380,6 +380,14 @@ header {
   outline-offset: 3px;
 }
 
+.app-card--disabled {
+  cursor: default;
+}
+
+.app-card--disabled .app-card__cta {
+  display: none;
+}
+
 /* Status badge */
 .app-card__status {
   position: absolute;
