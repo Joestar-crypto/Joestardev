@@ -12,7 +12,7 @@ const apps = [
   {
     name: 'PerpMath',
     kicker: 'Perpetuals Calculator',
-    description: 'Compute position size, liquidation price, funding costs and P&L before entering any perpetuals trade on MegaETH.',
+    description: 'Modèle de calcul de FDV et airdrop checker en temps réel — estime les valorisations et suit tes allocations sur MegaETH.',
     url: 'https://perpmath.joestarcrypto.com/',
     tags: ['Perpetuals'],
     accent: 'var(--accent-coral)',

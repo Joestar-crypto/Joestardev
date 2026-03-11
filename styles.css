@@ -199,8 +199,8 @@ header {
 
 .h-name em {
   font-style: normal;
-  color: #f5c518;
-  -webkit-text-fill-color: #f5c518;
+  color: #ffe600;
+  -webkit-text-fill-color: #ffe600;
   background: none;
   transition: filter 0.2s;
   display: inline-block;
