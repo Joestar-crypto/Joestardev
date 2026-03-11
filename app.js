@@ -12,7 +12,7 @@ const apps = [
   {
     name: 'PerpMath',
     kicker: 'Perpetuals Calculator',
-    description: 'Modèle de calcul de FDV et airdrop checker en temps réel — estime les valorisations et suit tes allocations sur MegaETH.',
+    description: 'FDV calculation model and real-time airdrop checker — estimate token valuations and track your airdrop allocations across protocols.',
     url: 'https://perpmath.joestarcrypto.com/',
     tags: ['Perpetuals'],
     accent: 'var(--accent-coral)',
