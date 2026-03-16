@@ -29,6 +29,16 @@ const apps = [
     image: './assets/yield.webp',
     status: 'wip',
   },
+  {
+    name: 'Protocol Wars',
+    kicker: 'DeFi Intelligence',
+    description: 'Real-time DEX competition dashboard — track market share, volume battles and protocol dominance across chains at a glance.',
+    url: '#',
+    tags: ['DEX', 'DeFi', 'Analytics'],
+    accent: 'var(--accent-pink)',
+    image: './Protocolwars.png',
+    status: 'wip',
+  },
 ];
 
 const grid = document.getElementById('appsGrid');
