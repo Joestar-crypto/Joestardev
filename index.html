@@ -1,53 +1,735 @@
-<!doctype html>
+﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RW5KPQ9H3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RW5KPQ9H3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2RW5KPQ9H3');
+  </script>
 
-      gtag('config', 'G-2RW5KPQ9H3');
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Joestar Apps | Portfolio</title>
-    <meta
-      name="description"
-      content="Joestar's developer portfolio — DeFi apps, on-chain tools and open-source projects."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" type="image/png" href="./Jojo2-modified.png" />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div class="bg-grid" aria-hidden="true"></div>
-    <div class="aurora" aria-hidden="true"></div>
-    <div class="ambient ambient--left" aria-hidden="true"></div>
-    <div class="ambient ambient--right" aria-hidden="true"></div>
-    <div class="ambient ambient--mid" aria-hidden="true"></div>
-    <div class="ambient ambient--bottom" aria-hidden="true"></div>
-    <canvas id="pCanvas" aria-hidden="true"></canvas>
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-ring" aria-hidden="true"></div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JoeStarCrypto | Web3 Portfolio</title>
+  <meta name="description" content="JoeStarCrypto — vibe-coder, analyst &amp; builder. DeFi apps, on-chain tools and open-source Web3 projects." />
 
-    <header>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="./Jojo2-modified.png" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       CSS VARIABLES — LIGHT / DARK
+    ═══════════════════════════════════════════════════════════ */
+    :root {
+      --bg:               #f5f0e6;
+      --surface:          rgba(245, 240, 230, 0.97);
+      --text:             #1c1812;
+      --text-dim:         #6b5d4a;
+      --accent:           #b07a28;
+      --accent-dim:       rgba(176, 122, 40, 0.11);
+      --border:           rgba(0, 0, 0, 0.10);
+      --border-hi:        rgba(176, 122, 40, 0.55);
+      --grid-line:        rgba(0, 0, 0, 0.055);
+      --grid-line-major:  rgba(0, 0, 0, 0.115);
+      --status-live:      #2d7d2d;
+      --status-soon:      #8a6a2a;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:               #070605;
+        --surface:          rgba(10, 8, 6, 0.97);
+        --text:             #e8dfd0;
+        --text-dim:         #7a7060;
+        --accent:           #c8922a;
+        --accent-dim:       rgba(200, 146, 42, 0.10);
+        --border:           rgba(255, 255, 255, 0.08);
+        --border-hi:        rgba(200, 146, 42, 0.50);
+        --grid-line:        rgba(255, 255, 255, 0.038);
+        --grid-line-major:  rgba(255, 255, 255, 0.076);
+        --status-live:      #4aaa4a;
+        --status-soon:      #aa8840;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    body {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      color: var(--text);
+      background-color: var(--bg);
+      /* Graph-paper: minor 20px grid + major 100px grid */
+      background-image:
+        linear-gradient(var(--grid-line-major) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line-major) 1px, transparent 1px),
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       LAYOUT WRAPPER
+    ═══════════════════════════════════════════════════════════ */
+    .wrap {
+      width: min(1240px, 100%);
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════════════════════ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .header-brand .accent {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-tagline {
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .gps-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.07em;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: border-color 0.25s;
+    }
+
+    .gps-badge:hover { border-color: var(--accent); }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-meta-right {
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-align: right;
+      line-height: 1.9;
+      text-transform: uppercase;
+    }
+
+    /* ── Avatar ── */
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      transition: border-color 0.22s;
+    }
+
+    .avatar:hover { border-color: var(--accent); }
+
+    /* ── Social icon links ── */
+    .icon-link {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.22s, border-color 0.22s, background 0.22s;
+      flex-shrink: 0;
+    }
+
+    .icon-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .icon-link svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       MAIN
+    ═══════════════════════════════════════════════════════════ */
+    main {
+      padding: 3rem 0 5rem;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Toggle buttons ── */
+    .view-toggle {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 2rem;
+    }
+
+    .toggle-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: color 0.22s, border-color 0.22s, background 0.22s;
+    }
+
+    .toggle-btn:hover {
+      color: var(--text);
+      border-color: var(--border-hi);
+    }
+
+    .toggle-btn.active {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .proj-view { display: none; }
+    .proj-view.active { display: block; }
+
+    /* ═══════════════════════════════════════════════════════════
+       MODE 1 — HOVER LIST
+    ═══════════════════════════════════════════════════════════ */
+    .hover-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .proj-row {
+      display: grid;
+      grid-template-columns: 2.8rem 1fr auto auto;
+      align-items: center;
+      column-gap: 2rem;
+      padding: 1.15rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.22s, padding-left 0.22s;
+    }
+
+    .proj-row:hover {
+      background: var(--accent-dim);
+      padding-left: 1rem;
+    }
+
+    .proj-row[data-live="true"] { cursor: pointer; }
+
+    .proj-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .proj-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .proj-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: border-color 0.22s, color 0.22s;
+    }
+
+    .proj-row:hover .proj-tag {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .proj-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .proj-dot.live {
+      background: var(--status-live);
+      box-shadow: 0 0 5px var(--status-live);
+    }
+
+    .proj-dot.soon { background: var(--status-soon); }
+
+    /* ── Floating preview ── */
+    #hover-floater {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+      width: 520px;
+      border: 1px solid var(--border-hi);
+      border-radius: 4px;
+      overflow: hidden;
+      opacity: 0;
+      background: var(--surface);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+      transition: opacity 0.2s;
+    }
+
+    #hover-floater.visible { opacity: 1; }
+
+    .floater-img-wrap {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .floater-img-wrap img,
+    .floater-img-wrap .mock-block {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .floater-img-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      border: 1px solid;
+    }
+
+    .floater-img-badge.live { color: #5cc05c; border-color: #5cc05c; background: rgba(0,0,0,0.45); }
+    .floater-img-badge.soon { color: #c8a060; border-color: #c8a060; background: rgba(0,0,0,0.45); }
+
+    .floater-body {
+      padding: 1rem 1.25rem 1.1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .floater-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .floater-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .floater-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+
+    .floater-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .floater-title em { font-style: italic; color: var(--accent); }
+
+    .floater-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .floater-hint {
+      margin-top: 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.7;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       MODE 2 — FILM STRIP
+    ═══════════════════════════════════════════════════════════ */
+    .film-track-wrap {
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .film-track-wrap::-webkit-scrollbar { height: 4px; }
+    .film-track-wrap::-webkit-scrollbar-track { background: transparent; }
+    .film-track-wrap::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .film-track {
+      display: flex;
+      gap: 12px;
+      min-width: max-content;
+    }
+
+    .film-card,
+    a.film-card {
+      width: 300px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.22s;
+    }
+
+    .film-card:hover { border-color: var(--accent); }
+
+    .film-img {
+      width: 300px;
+      height: 175px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .film-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .film-body { padding: 0.85rem 0.9rem 0.9rem; }
+
+    .film-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .film-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 7px;
+      line-height: 1.3;
+    }
+
+    .film-title em { font-style: italic; color: var(--accent); }
+
+    .film-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .film-status {
+      font-family: 'DM Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .film-status.live { color: var(--status-live); border: 1px solid var(--status-live); }
+    .film-status.soon { color: var(--status-soon); border: 1px solid var(--status-soon); }
+
+    /* ═══════════════════════════════════════════════════════════
+       MODE 3 — BENTO GRID
+       Row 1: proj[0] 4col × 2row  |  proj[1] 2col × 1row
+       Row 2: proj[0] (cont.)       |  proj[2] 2col × 1row
+       Row 3: proj[3]  proj[4]  proj[5]  — 2col × 1row each
+    ═══════════════════════════════════════════════════════════ */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 165px;
+      gap: 10px;
+    }
+
+    .bento-item {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      transition: border-color 0.22s;
+    }
+
+    .bento-item[data-live="true"] { cursor: pointer; }
+    .bento-item:hover { border-color: var(--accent); }
+
+    .bento-item--large  { grid-column: span 4; grid-row: span 2; }
+    .bento-item--medium { grid-column: span 2; grid-row: span 1; }
+    .bento-item--small  { grid-column: span 2; grid-row: span 1; }
+
+    .bento-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .bento-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bento-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0);
+      opacity: 0;
+      transition: background 0.25s, opacity 0.25s;
+    }
+
+    .bento-item:hover .bento-overlay {
+      background: rgba(0, 0, 0, 0.62);
+      opacity: 1;
+    }
+
+    .bento-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .bento-item--large .bento-title { font-size: 30px; }
+    .bento-title em { font-style: italic; color: var(--accent); }
+
+    .bento-status {
+      font-family: 'DM Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 2px;
+      display: inline-block;
+      align-self: flex-start;
+    }
+
+    .bento-status.live { color: #5cc05c; border: 1px solid #5cc05c; }
+    .bento-status.soon { color: #c8a060; border: 1px solid #c8a060; }
+
+    .bento-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+      margin-top: 6px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .bento-item--large .bento-desc {
+      display: block;
+      font-size: 11px;
+    }
+
+    .bento-item--medium .bento-desc,
+    .bento-item--small  .bento-desc {
+      display: block;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       MOCK BLOCK — coloured fallback when img is null
+    ═══════════════════════════════════════════════════════════ */
+    .mock-block {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.22s;
+    }
+
+    .footer-links a:hover { opacity: 0.65; }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────────────────────────────── -->
+<header>
+  <div class="wrap">
+    <div class="header-inner">
       <div class="header-left">
-        <div class="avatar-wrap">
-          <img class="avatar-img"
-            src="./Jojo2.webp"
-            alt="joestarcrypto">
-          <div class="avatar-ring"></div>
-        </div>
-        <div class="header-name">
-          <div class="h-name"><em>joestar</em>crypto</div>
-          <div class="h-tag"><span class="ldot" style="display:inline-block;margin-right:5px;vertical-align:middle;"></span>vibe-coder · analyst · builder</div>
+        <img class="avatar" src="./Jojo2.webp" alt="JoeStarCrypto" />
+        <div>
+          <div class="header-brand">JoeStar<span class="accent">Crypto</span></div>
+          <div class="header-meta">
+            <span class="header-tagline">Vibe-Coder · Analyst · Builder</span>
+          </div>
         </div>
       </div>
       <div class="header-right">
@@ -61,48 +743,351 @@
           <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
         </a>
       </div>
-    </header>
+    </div>
+  </div>
+</header>
 
-    <main class="page">
+<!-- ─── PORTFOLIO META BAR ───────────────────────────────────────── -->
+<div style="border-bottom:1px solid var(--border); background:var(--surface);">
+  <div class="wrap" style="height:32px;display:flex;align-items:center;gap:1.5rem;">
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);">Web3 Portfolio</span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--text-dim);">2024 — Ongoing</span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--text-dim);">6 Projects</span>
+  </div>
+</div>
 
-      <div class="section-header">
-        <p class="section-header__title">Projects</p>
-        <span class="section-header__line"></span>
-        <span class="section-header__count">4 apps</span>
+<!-- ─── MAIN ───────────────────────────────────────────────────────── -->
+<main>
+  <div class="wrap">
+    <div class="section-label">Projects</div>
+
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-mode="hover">— Hover</button>
+      <button class="toggle-btn" data-mode="film">▷ Film</button>
+      <button class="toggle-btn" data-mode="bento">⊞ Bento</button>
+    </div>
+
+    <!-- View: HOVER LIST -->
+    <div class="proj-view active" id="view-hover">
+      <div class="hover-list" id="hover-list"></div>
+    </div>
+
+    <!-- View: FILM STRIP -->
+    <div class="proj-view" id="view-film">
+      <div class="film-track-wrap">
+        <div class="film-track" id="film-track"></div>
       </div>
+    </div>
 
-      <section class="apps-grid" id="appsGrid" aria-label="Apps"></section>
+    <!-- View: BENTO GRID -->
+    <div class="proj-view" id="view-bento">
+      <div class="bento-grid" id="bento-grid"></div>
+    </div>
+  </div>
+</main>
 
-      <footer class="footer">
-        <p class="footer__copy">&copy; 2026 Joestar &middot; All rights reserved</p>
-        <nav class="footer__links">
-          <a href="https://x.com/JoestarCrypto" target="_blank" rel="noreferrer noopener">Twitter</a>
-          <a href="https://github.com/Joestar-crypto" target="_blank" rel="noreferrer noopener">GitHub</a>
-          <a href="https://t.me/joestarcrypto" target="_blank" rel="noreferrer noopener">Telegram</a>
-        </nav>
-      </footer>
-    </main>
+<!-- ─── FOOTER ─────────────────────────────────────────────────────── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 JoeStarCrypto &middot; All rights reserved</span>
+      <nav class="footer-links">
+        <a href="https://x.com/JoestarCrypto" target="_blank" rel="noreferrer noopener">X</a>
+        <a href="https://t.me/joestarcrypto" target="_blank" rel="noreferrer noopener">Telegram</a>
+        <a href="https://github.com/Joestar-crypto" target="_blank" rel="noreferrer noopener">Github</a>
+      </nav>
+    </div>
+  </div>
+</footer>
 
-    <template id="appCardTemplate">
-      <a class="app-card" target="_blank" rel="noreferrer noopener">
-        <div class="app-card__banner">
-          <img class="app-card__banner-img" alt="" loading="lazy" />
-          <div class="app-card__banner-overlay"></div>
-          <span class="app-card__status"></span>
-        </div>
-        <div class="app-card__content">
-          <div class="app-card__meta">
-            <p class="app-card__kicker"></p>
-            <span class="app-card__cta">&#x2197;</span>
-          </div>
-          <h2 class="app-card__name"></h2>
-          <p class="app-card__description"></p>
-          <div class="app-card__tags"></div>
-        </div>
-        <div class="app-card__holo" aria-hidden="true"></div>
-      </a>
-    </template>
+<!-- ─── HOVER FLOATER ──────────────────────────────────────────────── -->
+<div id="hover-floater" aria-hidden="true"></div>
 
-    <script type="module" src="./app.js"></script>
-  </body>
+<script>
+  /* ═══════════════════════════════════════════════════════════════
+     PROJECTS DATA
+  ═══════════════════════════════════════════════════════════════ */
+  const PROJECTS = [
+    {
+      num: '01',
+      title: 'Mega<em>Bunnish</em>',
+      tag: 'ECOSYSTEM MAP',
+      desc: 'Interactive map of the MegaETH ecosystem',
+      status: 'live',
+      url: 'https://megabunnish.com/',
+      img: './assets/megabunnish.webp',
+      color: '#1a2e20',
+    },
+    {
+      num: '02',
+      title: 'Perp<em>Math</em>',
+      tag: 'PERPETUALS CALC',
+      desc: 'FDV model & real-time airdrop checker',
+      status: 'live',
+      url: 'https://perpmath.joestarcrypto.com/',
+      img: './assets/perp.webp',
+      color: '#201a2e',
+    },
+    {
+      num: '03',
+      title: 'Yield <em>Radar</em>',
+      tag: 'YIELD OPP.',
+      desc: 'APR tracking across DeFi protocols',
+      status: 'soon',
+      url: '#',
+      img: './assets/yield.webp',
+      color: '#2e201a',
+    },
+    {
+      num: '04',
+      title: 'Protocol <em>Wars</em>',
+      tag: 'DEFI INTEL',
+      desc: 'On-chain competitive analysis dashboard',
+      status: 'soon',
+      url: '#',
+      img: './Protocolwars.png',
+      color: '#1a2e2e',
+    },
+    {
+      num: '05',
+      title: 'Chain <em>Scout</em>',
+      tag: 'EXPLORER',
+      desc: 'Multi-chain address & tx intelligence',
+      status: 'soon',
+      url: '#',
+      img: null,
+      color: '#2e1a2e',
+    },
+    {
+      num: '06',
+      title: 'Memo<em>Pool</em>',
+      tag: 'MEV TOOLS',
+      desc: 'Mempool visualizer & sandwich detector',
+      status: 'soon',
+      url: '#',
+      img: null,
+      color: '#2e2e1a',
+    },
+  ];
+
+  /* ═══════════════════════════════════════════════════════════════
+     imgOrMock — real <img> if proj.img set, coloured block otherwise
+  ═══════════════════════════════════════════════════════════════ */
+  function imgOrMock(proj) {
+    if (proj.img) {
+      const img = document.createElement('img');
+      img.src = proj.img;
+      img.alt = proj.tag;
+      img.loading = 'lazy';
+      return img;
+    }
+    const mock = document.createElement('div');
+    mock.className = 'mock-block';
+    mock.style.background = proj.color;
+    mock.textContent = proj.tag;
+    return mock;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MODE 1 — HOVER LIST
+  ═══════════════════════════════════════════════════════════════ */
+  const hoverList = document.getElementById('hover-list');
+  const floater   = document.getElementById('hover-floater');
+
+  for (const proj of PROJECTS) {
+    const isLive = proj.status === 'live' && proj.url !== '#';
+
+    const row = document.createElement('div');
+    row.className = 'proj-row';
+    row.dataset.live = isLive;
+
+    const num = document.createElement('span');
+    num.className = 'proj-num';
+    num.textContent = proj.num;
+
+    const title = document.createElement('span');
+    title.className = 'proj-title';
+    title.innerHTML = proj.title;
+
+    const tag = document.createElement('span');
+    tag.className = 'proj-tag';
+    tag.textContent = proj.tag;
+
+    const dot = document.createElement('span');
+    dot.className = 'proj-dot ' + proj.status;
+
+    row.append(num, title, tag, dot);
+
+    row.addEventListener('mouseenter', () => {
+      floater.innerHTML = '';
+
+      const imgWrap = document.createElement('div');
+      imgWrap.className = 'floater-img-wrap';
+      imgWrap.appendChild(imgOrMock(proj));
+
+      const badge = document.createElement('span');
+      badge.className = 'floater-img-badge ' + proj.status;
+      badge.textContent = proj.status === 'live' ? '● Live' : '○ Soon';
+      imgWrap.appendChild(badge);
+
+      const body = document.createElement('div');
+      body.className = 'floater-body';
+
+      const top = document.createElement('div');
+      top.className = 'floater-top';
+
+      const tagEl = document.createElement('span');
+      tagEl.className = 'floater-tag';
+      tagEl.textContent = proj.tag;
+
+      const numEl = document.createElement('span');
+      numEl.className = 'floater-num';
+      numEl.textContent = proj.num;
+
+      top.append(tagEl, numEl);
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'floater-title';
+      titleEl.innerHTML = proj.title;
+
+      const descEl = document.createElement('p');
+      descEl.className = 'floater-desc';
+      descEl.textContent = proj.desc;
+
+      const isLive = proj.status === 'live' && proj.url !== '#';
+      const hint = document.createElement('div');
+      hint.className = 'floater-hint';
+      hint.textContent = isLive ? '↗ Click to open' : 'Coming soon';
+
+      body.append(top, titleEl, descEl, hint);
+      floater.append(imgWrap, body);
+      floater.classList.add('visible');
+    });
+
+    row.addEventListener('mouseleave', () => {
+      floater.classList.remove('visible');
+    });
+
+    if (isLive) {
+      row.addEventListener('click', () =>
+        window.open(proj.url, '_blank', 'noreferrer,noopener')
+      );
+    }
+
+    hoverList.appendChild(row);
+  }
+
+  /* Floater follows cursor */
+  document.addEventListener('mousemove', (e) => {
+    floater.style.left = (e.clientX + 22) + 'px';
+    floater.style.top  = Math.max(10, e.clientY - 80) + 'px';
+  });
+
+  /* ═══════════════════════════════════════════════════════════════
+     MODE 2 — FILM STRIP
+  ═══════════════════════════════════════════════════════════════ */
+  const filmTrack = document.getElementById('film-track');
+
+  for (const proj of PROJECTS) {
+    const isLive = proj.status === 'live' && proj.url !== '#';
+    const card = document.createElement(isLive ? 'a' : 'div');
+    card.className = 'film-card';
+    if (isLive) {
+      card.href   = proj.url;
+      card.target = '_blank';
+      card.rel    = 'noreferrer noopener';
+    }
+
+    const imgWrap = document.createElement('div');
+    imgWrap.className = 'film-img';
+    imgWrap.appendChild(imgOrMock(proj));
+
+    const body = document.createElement('div');
+    body.className = 'film-body';
+
+    const tagEl = document.createElement('span');
+    tagEl.className = 'film-tag';
+    tagEl.textContent = proj.tag;
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'film-title';
+    titleEl.innerHTML = proj.title;
+
+    const descEl = document.createElement('p');
+    descEl.className = 'film-desc';
+    descEl.textContent = proj.desc;
+
+    const statusEl = document.createElement('span');
+    statusEl.className = 'film-status ' + proj.status;
+    statusEl.textContent = proj.status === 'live' ? 'Live' : 'Soon';
+
+    body.append(tagEl, titleEl, descEl, statusEl);
+    card.append(imgWrap, body);
+    filmTrack.appendChild(card);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MODE 3 — BENTO GRID
+  ═══════════════════════════════════════════════════════════════ */
+  const bentoGrid   = document.getElementById('bento-grid');
+  const BENTO_SIZES = ['large', 'medium', 'medium', 'small', 'small', 'small'];
+
+  for (let i = 0; i < PROJECTS.length; i++) {
+    const proj   = PROJECTS[i];
+    const size   = BENTO_SIZES[i] || 'small';
+    const isLive = proj.status === 'live' && proj.url !== '#';
+
+    const item = document.createElement('div');
+    item.className = 'bento-item bento-item--' + size;
+    item.dataset.live = isLive;
+
+    const bg = document.createElement('div');
+    bg.className = 'bento-bg';
+    bg.appendChild(imgOrMock(proj));
+
+    const overlay = document.createElement('div');
+    overlay.className = 'bento-overlay';
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'bento-title';
+    titleEl.innerHTML = proj.title;
+
+    const descEl = document.createElement('p');
+    descEl.className = 'bento-desc';
+    descEl.textContent = proj.desc;
+
+    const statusEl = document.createElement('span');
+    statusEl.className = 'bento-status ' + proj.status;
+    statusEl.textContent = proj.status === 'live' ? 'Live' : 'Soon';
+
+    overlay.append(titleEl, descEl, statusEl);
+    item.append(bg, overlay);
+
+    if (isLive) {
+      item.addEventListener('click', () =>
+        window.open(proj.url, '_blank', 'noreferrer,noopener')
+      );
+    }
+
+    bentoGrid.appendChild(item);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     VIEW TOGGLE
+  ═══════════════════════════════════════════════════════════════ */
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  const views      = document.querySelectorAll('.proj-view');
+
+  for (const btn of toggleBtns) {
+    btn.addEventListener('click', () => {
+      const mode = btn.dataset.mode;
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      views.forEach(v => v.classList.remove('active'));
+      document.getElementById('view-' + mode).classList.add('active');
+    });
+  }
+</script>
+</body>
 </html>
+
