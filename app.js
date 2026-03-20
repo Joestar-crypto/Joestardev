@@ -30,10 +30,10 @@ const apps = [
     status: 'wip',
   },
   {
-    name: 'Protocol Wars',
+    name: 'FlipIndex',
     kicker: 'DeFi Intelligence',
     description: 'Real-time DEX competition dashboard — track market share, volume battles and protocol dominance across chains at a glance.',
-    url: '#',
+    url: 'https://flip-index.xyz/',
     tags: ['DEX', 'DeFi', 'Analytics'],
     accent: 'var(--accent-pink)',
     image: './Protocolwars.png',
