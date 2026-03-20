@@ -36,7 +36,7 @@ const apps = [
     url: 'https://flip-index.xyz/',
     tags: ['DEX', 'DeFi', 'Analytics'],
     accent: 'var(--accent-pink)',
-    image: './Protocolwars.png',
+    image: './assets/FlipIndex.webp',
     status: 'wip',
   },
 ];
