@@ -752,7 +752,7 @@
   <div class="wrap" style="height:32px;display:flex;align-items:center;gap:1.5rem;">
     <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);">Web3 Portfolio</span>
     <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--text-dim);">2024 — Ongoing</span>
-    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--text-dim);">7 Projects</span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--text-dim);">5 Projects</span>
   </div>
 </div>
 
@@ -820,26 +820,6 @@
     },
     {
       num: '02',
-      title: 'Perp<em>Math</em>',
-      tag: 'PERPETUALS CALC',
-      desc: 'FDV model & real-time airdrop checker',
-      status: 'live',
-      url: 'https://perpmath.joestarcrypto.com/',
-      img: './assets/perp.webp',
-      color: '#201a2e',
-    },
-    {
-      num: '03',
-      title: 'Yield <em>Radar</em>',
-      tag: 'YIELD OPP.',
-      desc: 'APR tracking across DeFi protocols',
-      status: 'soon',
-      url: '#',
-      img: './assets/yield.webp',
-      color: '#2e201a',
-    },
-    {
-      num: '04',
       title: 'Flip<em>Index</em>',
       tag: 'DEFI INTEL',
       desc: 'Real-time DEX competition dashboard — track market share, volume battles and protocol dominance across chains at a glance.',
@@ -849,27 +829,7 @@
       color: '#1a2e2e',
     },
     {
-      num: '05',
-      title: 'Chain <em>Scout</em>',
-      tag: 'EXPLORER',
-      desc: 'Multi-chain address & tx intelligence',
-      status: 'soon',
-      url: '#',
-      img: null,
-      color: '#2e1a2e',
-    },
-    {
-      num: '06',
-      title: 'Memo<em>Pool</em>',
-      tag: 'MEV TOOLS',
-      desc: 'Mempool visualizer & sandwich detector',
-      status: 'soon',
-      url: '#',
-      img: null,
-      color: '#2e2e1a',
-    },
-    {
-      num: '07',
+      num: '03',
       title: 'Hypurr<em>mium</em>',
       tag: 'BUYBACK P/E',
       desc: 'Spot the premium before the market does. Real-time HYPE P/E ratio built on daily buybacks — instantly know if the market is pricing HYPE cheap, fair, or expensive.',
@@ -877,6 +837,26 @@
       url: 'https://hypurrmium.com/',
       img: './hypurrmium.webp',
       color: '#0d1a0d',
+    },
+    {
+      num: '04',
+      title: 'Perp<em>Math</em>',
+      tag: 'PERPETUALS CALC',
+      desc: 'FDV model & real-time airdrop checker',
+      status: 'live',
+      url: 'https://perpmath.joestarcrypto.com/',
+      img: './assets/perp.webp',
+      color: '#201a2e',
+    },
+    {
+      num: '05',
+      title: 'Yield <em>Radar</em>',
+      tag: 'YIELD OPP.',
+      desc: 'APR tracking across DeFi protocols',
+      status: 'soon',
+      url: '#',
+      img: './assets/yield.webp',
+      color: '#2e201a',
     },
   ];
 
@@ -1040,7 +1020,7 @@
      MODE 3 — BENTO GRID
   ═══════════════════════════════════════════════════════════════ */
   const bentoGrid   = document.getElementById('bento-grid');
-  const BENTO_SIZES = ['large', 'medium', 'medium', 'small', 'small', 'small', 'small'];
+  const BENTO_SIZES = ['large', 'medium', 'medium', 'small', 'small'];
 
   for (let i = 0; i < PROJECTS.length; i++) {
     const proj   = PROJECTS[i];
