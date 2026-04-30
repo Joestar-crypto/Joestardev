@@ -840,6 +840,16 @@
     },
     {
       num: '04',
+      title: 'Mega<em>fees</em>',
+      tag: 'FEE TRACKER',
+      desc: 'Live fee dashboard for MegaETH activity and protocol economics.',
+      status: 'live',
+      url: 'https://megafees.com/',
+      img: './Megafees.png',
+      color: '#1f2028',
+    },
+    {
+      num: '05',
       title: 'Perp<em>Math</em>',
       tag: 'PERPETUALS CALC',
       desc: 'FDV model & real-time airdrop checker',
@@ -849,7 +859,7 @@
       color: '#201a2e',
     },
     {
-      num: '05',
+      num: '06',
       title: 'Yield <em>Radar</em>',
       tag: 'YIELD OPP.',
       desc: 'APR tracking across DeFi protocols',
@@ -857,16 +867,6 @@
       url: '#',
       img: './assets/yield.webp',
       color: '#2e201a',
-    },
-    {
-      num: '06',
-      title: 'Mega<em>fees</em>',
-      tag: 'FEE TRACKER',
-      desc: 'Live fee dashboard for MegaETH activity and protocol economics.',
-      status: 'live',
-      url: 'https://megafees.com/',
-      img: './Megafees.png',
-      color: '#1f2028',
     },
   ];
 
@@ -979,8 +979,13 @@
 
   /* Floater follows cursor */
   document.addEventListener('mousemove', (e) => {
+    const topMargin = 10;
+    const preferredTop = e.clientY - 80;
+    const floaterHeight = floater.offsetHeight || 0;
+    const maxTop = Math.max(topMargin, window.innerHeight - floaterHeight - topMargin);
+
     floater.style.left = (e.clientX + 22) + 'px';
-    floater.style.top  = Math.max(10, e.clientY - 80) + 'px';
+    floater.style.top  = Math.min(Math.max(topMargin, preferredTop), maxTop) + 'px';
   });
 
   /* ═══════════════════════════════════════════════════════════════
