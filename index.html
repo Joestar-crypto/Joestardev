@@ -12,12 +12,12 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joestar Portfolio</title>
-  <meta name="description" content="JoeStarCrypto — vibe-coder, analyst &amp; builder. DeFi apps, on-chain tools and open-source Web3 projects." />
+  <title>JoeStarCrypto — Portfolio</title>
+  <meta name="description" content="JoeStarCrypto — DeFi analyst and builder of on-chain dashboards, protocol maps, and Web3 tools." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="./Jojo2-modified.png" />
 
   <style>
@@ -716,6 +716,7 @@
 
     .footer-links a:hover { opacity: 0.65; }
   </style>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
 
@@ -728,7 +729,7 @@
         <div>
           <div class="header-brand">Joestar<span class="accent">Crypto</span></div>
           <div class="header-meta">
-            <span class="header-tagline">Vibe-Coder · Analyst · Builder</span>
+            <span class="header-tagline">On-chain tools · DeFi analytics · Builder</span>
           </div>
         </div>
       </div>
@@ -748,11 +749,11 @@
 </header>
 
 <!-- ─── PORTFOLIO META BAR ───────────────────────────────────────── -->
-<div style="border-bottom:1px solid var(--border); background:var(--surface);">
-  <div class="wrap" style="height:32px;display:flex;align-items:center;gap:1.5rem;">
-    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);">Web3 Portfolio</span>
-    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--text-dim);">2024 — Ongoing</span>
-    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--text-dim);">6 Projects</span>
+<div class="portfolio-meta" aria-label="Portfolio overview">
+  <div class="wrap portfolio-meta__inner">
+    <span>Web3 Portfolio</span>
+    <span>2024 — Ongoing</span>
+    <span>6 Tools</span>
   </div>
 </div>
 
@@ -762,9 +763,9 @@
     <div class="section-label">Projects</div>
 
     <div class="view-toggle">
-      <button class="toggle-btn active" data-mode="hover">— Hover</button>
+      <button class="toggle-btn active" data-mode="hover">Index</button>
       <button class="toggle-btn" data-mode="bento">⊞ Bento</button>
-      <button class="toggle-btn" data-mode="film">▷ Filé</button>
+      <button class="toggle-btn" data-mode="film">▷ Film</button>
     </div>
 
     <!-- View: HOVER LIST -->
@@ -913,10 +914,14 @@
     tag.className = 'proj-tag';
     tag.textContent = proj.tag;
 
+    const desc = document.createElement('span');
+    desc.className = 'proj-row-desc';
+    desc.textContent = proj.desc;
+
     const dot = document.createElement('span');
     dot.className = 'proj-dot ' + proj.status;
 
-    row.append(num, title, tag, dot);
+    row.append(num, title, tag, desc, dot);
 
     row.addEventListener('mouseenter', () => {
       floater.innerHTML = '';
@@ -957,7 +962,7 @@
       const isLive = proj.status === 'live' && proj.url !== '#';
       const hint = document.createElement('div');
       hint.className = 'floater-hint';
-      hint.textContent = isLive ? '↗ Click to open' : 'Coming soon';
+      hint.textContent = isLive ? '↗ Open project' : 'Coming soon';
 
       body.append(top, titleEl, descEl, hint);
       floater.append(imgWrap, body);
@@ -978,13 +983,19 @@
   }
 
   /* Floater follows cursor */
-  document.addEventListener('mousemove', (e) => {
-    const topMargin = 10;
-    const preferredTop = e.clientY - 80;
-    const floaterHeight = floater.offsetHeight || 0;
-    const maxTop = Math.max(topMargin, window.innerHeight - floaterHeight - topMargin);
+  document.addEventListener('mousemove', (event) => {
+    if (window.matchMedia('(hover: none)').matches) return;
 
-    floater.style.left = (e.clientX + 22) + 'px';
+    const topMargin = 10;
+    const leftMargin = 12;
+    const preferredTop = event.clientY - 80;
+    const preferredLeft = event.clientX + 22;
+    const floaterHeight = floater.offsetHeight || 0;
+    const floaterWidth = floater.offsetWidth || 0;
+    const maxTop = Math.max(topMargin, window.innerHeight - floaterHeight - topMargin);
+    const maxLeft = Math.max(leftMargin, window.innerWidth - floaterWidth - leftMargin);
+
+    floater.style.left = Math.min(Math.max(leftMargin, preferredLeft), maxLeft) + 'px';
     floater.style.top  = Math.min(Math.max(topMargin, preferredTop), maxTop) + 'px';
   });
 
